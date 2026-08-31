@@ -382,10 +382,10 @@ export default function App() {
   const getCoverUrl = (proj: Project) => {
     // Use a local generated image for specific project replacement when present
     if (proj.slug === 'chronostasis') {
-      return 'public/assets/Gemini_Generated_Image_kyz06dkyz06dkyz0.png';
+      return '/Gemini_Generated_Image_kyz06dkyz06dkyz0.png';
     }
     if (proj.slug === 'neural-monolith') {
-      return 'public/assets/Gemini_Generated_Image_epxf6eepxf6eepxf.png';
+      return '/Gemini_Generated_Image_epxf6eepxf6eepxf.png';
     }
     const cover = proj.media.find(m => m.isCover);
     return cover ? cover.url : 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200';
@@ -486,7 +486,7 @@ export default function App() {
         <a href="#hero" className="flex items-center gap-3 group text-white">
             <div className="w-5 h-5 rounded-full overflow-hidden border border-neutral-800 flex-shrink-0 relative">
             <img 
-              src="public/assets/Gosavi.png" 
+              src="/Gosavi.png" 
               alt="Logo" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
@@ -746,7 +746,7 @@ export default function App() {
             <div className="relative aspect-video w-full overflow-hidden bg-black">
               <video
                 ref={videoRef}
-                src="public/assets/SHADOW_BUREAU_—_SECOND_CINE.mp4"
+                src="/SHADOW_BUREAU_—_SECOND_CINE.mp4"
                 autoPlay
                 loop
                 muted
@@ -781,7 +781,7 @@ export default function App() {
               >
                 <div className="pointer-events-auto bg-black/85 rounded-sm p-2 max-w-[88%] max-h-[76%] w-[min(1100px,92%)] shadow-2xl">
                   <video
-                    src="/assets/SHADOW_BUREAU_—_SECOND_CINE.mp4"
+                    src="/SHADOW_BUREAU_—_SECOND_CINE.mp4"
                     muted
                     autoPlay
                     loop

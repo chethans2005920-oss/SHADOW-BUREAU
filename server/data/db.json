@@ -46,7 +46,7 @@
       "results": "Awarded Best Creative Direction at the Paris Fashion Film Festival. Campaign garnered over 18 million views organically and established a new benchmark for luxury visual marketing.",
       "accentColor": "#991B1B",
       "media": [
-        { "id": "chrono-1", "url": "/Users/chethan/Downloads/SHADOW BURESU final/public/assets/Gemini_Generated_Image_kyz06dkyz06dkyz0.png", "type": "IMAGE", "isCover": true, "altText": "CONTOUR - Issue: The Severe Line beauty & fashion magazine cover" },
+        { "id": "chrono-1", "url": "/Gemini_Generated_Image_kyz06dkyz06dkyz0.png", "type": "IMAGE", "isCover": true, "altText": "CONTOUR - Issue: The Severe Line beauty & fashion magazine cover" },
         { "id": "chrono-2", "url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": false, "altText": "Paris Avant-Garde exquisite black fabrics detail" }
       ],
       "categories": [

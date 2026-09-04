@@ -80,7 +80,7 @@ const DIGITAL_SHOWCASE: Project[] = [
     media: [
       {
         id: "m-2",
-        url: "https://images.unsplash.com/photo-1626544827763-d516dce335e2?auto=format&fit=crop&q=80&w=1200",
+        url: "/motion design.jpeg",
         type: "IMAGE",
         isCover: true,
         altText: "Kinetic Typography & Motion Graphics Reel Preview"
@@ -92,8 +92,8 @@ const DIGITAL_SHOWCASE: Project[] = [
   {
     id: "proj-3",
     slug: "brand-launch-protocol",
-    title: "APEX BRAND PROMOTION SYSTEM",
-    description: "An end-to-end digital launch pack, luxury design system, and conversion-tested marketing suite for disruptive products.",
+    title: "THE INFLUENCER ALGORITHM",
+    description: "The Silence Marketing E-Book Bundle is a dark, ultra-minimalist digital product suite designed for modern creators and marketing influencers.",
     year: 2025,
     projectType: "PRODUCT_SYSTEM" as any,
     status: "PUBLISHED",
@@ -108,10 +108,10 @@ const DIGITAL_SHOWCASE: Project[] = [
     media: [
       {
         id: "m-3",
-        url: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=1200",
+        url: "/marketing.png",
         type: "IMAGE",
         isCover: true,
-        altText: "High-End Graphic Design & Brand Guidelines Suite"
+        altText: "Multi-Cover Editorial E-Book & Publication Grid Suite"
       }
     ],
     categories: [{ id: "c-3", name: "Conversion Design", slug: "conversion-design" }],

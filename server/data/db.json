@@ -2,247 +2,246 @@
   "projects": [
     {
       "id": "proj-1",
-      "slug": "aeon-crypt",
-      "title": "Aeon Crypt",
-      "description": "An interactive architectural projection Mapping & Spatial Synthesis exploring post-human ruins.",
+      "slug": "omni-growth-matrix",
+      "title": "Omni Growth Matrix",
+      "description": "An automated full-funnel customer acquisition system and multi-channel revenue engine.",
       "year": 2025,
-      "projectType": "SELF_INITIATED",
+      "projectType": "PRODUCT_SYSTEM",
       "status": "PUBLISHED",
       "featured": true,
-      "client": "Cologne Museum of Art",
-      "location": "Cologne, Germany",
-      "objective": "To map a 12th-century cathedral ruin with generative, volumetric light structures that visualize archaeological acoustics.",
-      "approach": "Utilizing deep procedural algorithms and generative design systems, we tracked and re-manifested acoustic reflections in real time.",
-      "execution": "We rigged three 30,000-lumen laser projectors with custom ultrasonic tracking arrays. The visual language was rendered in monochrome point-clouds.",
-      "results": "Over 45,000 visitors in 10 days. Documented as one of the most culturally significant site-specific digital art installations of the decade.",
+      "client": "Apex Direct",
+      "location": "Global / SaaS",
+      "objective": "Engineer an end-to-end automated conversion funnel to scale qualified customer acquisition while decreasing customer acquisition cost (CAC).",
+      "approach": "Constructed a multi-tiered ad-to-lander infrastructure using real-time dynamic pricing, intent tracking, and automated retargeting loops.",
+      "execution": "Deployed high-speed Next.js conversion landing pages, customized CRM webhooks, and integrated automated tracking via Meta CAPI and Google Enhanced Conversions.",
+      "results": "Generated $3.4M in client ARR within 90 days. Scaled ROAS from 1.8x to 4.6x across cold traffic.",
       "accentColor": "#A3A3A3",
       "media": [
-        { "id": "aeon-1", "url": "https://images.unsplash.com/photo-1590073844006-33379778ae09?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": true, "altText": "Aesthetic single smooth grey pebble stone on clean white background with shadow" },
-        { "id": "aeon-2", "url": "https://images.unsplash.com/photo-1550684848-fac1c5b4e853?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": false, "altText": "Acoustic signal visualizers detail" }
+        { "id": "growth-1", "url": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": true, "altText": "Analytics dashboard showing conversion growth curves" },
+        { "id": "growth-2", "url": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": false, "altText": "Data analytics and performance tracking matrix" }
       ],
       "categories": [
-        { "id": "cat-1", "name": "Spatial Design", "slug": "spatial-design" },
-        { "id": "cat-2", "name": "Interactive Installation", "slug": "interactive-installation" }
+        { "id": "cat-1", "name": "Growth Architecture", "slug": "growth-architecture" },
+        { "id": "cat-2", "name": "Funnel Optimization", "slug": "funnel-optimization" }
       ],
       "capabilities": [
-        { "id": "cap-1", "name": "Spatial & Environmental Design", "description": "Mapping and physical site transformations" },
-        { "id": "cap-2", "name": "Procedural Engineering", "description": "Custom real-time software systems" }
+        { "id": "cap-1", "name": "Full-Funnel CRO & Architecture", "description": "High-converting landing pages and conversion-rate optimization" },
+        { "id": "cap-2", "name": "Paid Acquisition Systems", "description": "Cold traffic acquisition and multi-channel scaling" }
       ]
     },
     {
       "id": "proj-2",
-      "slug": "chronostasis",
-      "title": "Chronostasis",
-      "description": "A high-fashion sensory experience & cinematic campaign for the Paris Avant-Garde.",
+      "slug": "viral-creative-vault",
+      "title": "Viral Creative Vault",
+      "description": "Modular high-converting motion design templates, hook scripts, and cinematic ad packages.",
       "year": 2026,
-      "projectType": "CLIENT",
+      "projectType": "DIGITAL_PRODUCT",
       "status": "PUBLISHED",
       "featured": true,
-      "client": "Maison de L'Ombre",
-      "location": "Paris, France",
-      "objective": "To disrupt the traditional digital fashion campaign model through hyper-slow physical kinetic movement and neural imagery.",
-      "approach": "We filmed model silhouettes using ultra-high-speed Phantom cameras at 1000fps under custom-programmed strobe frequencies.",
-      "execution": "Using physical textile simulations integrated with robotic lighting arrays, we synchronized physical motion with live soundscapes.",
-      "results": "Awarded Best Creative Direction at the Paris Fashion Film Festival. Campaign garnered over 18 million views organically and established a new benchmark for luxury visual marketing.",
+      "client": "E-Commerce Brands & Agencies",
+      "location": "Global",
+      "objective": "Eliminate ad creative fatigue with plug-and-play high-velocity video assets engineered for TikTok, Reels, and Meta Ads.",
+      "approach": "Analyzed over 500 top-performing direct response ads to build 50+ reusable motion graphic templates, 3D visual hooks, and script formulas.",
+      "execution": "Rendered node-based motion graphics in DaVinci Resolve and After Effects, compiled into an instant-access template vault with step-by-step launch documentation.",
+      "results": "Used by 400+ marketing agencies. Generated over 25M impressions and lowered average cost-per-click (CPC) by 42%.",
       "accentColor": "#991B1B",
       "media": [
-        { "id": "chrono-1", "url": "/Gemini_Generated_Image_kyz06dkyz06dkyz0.png", "type": "IMAGE", "isCover": true, "altText": "CONTOUR - Issue: The Severe Line beauty & fashion magazine cover" },
-        { "id": "chrono-2", "url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": false, "altText": "Paris Avant-Garde exquisite black fabrics detail" }
+        { "id": "chrono-1", "url": "/Gemini_Generated_Image_kyz06dkyz06dkyz0.png", "type": "IMAGE", "isCover": true, "altText": "Editorial creative assets and digital marketing product cover" },
+        { "id": "chrono-2", "url": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": false, "altText": "High-contrast dark mode abstract digital asset design" }
       ],
       "categories": [
-        { "id": "cat-3", "name": "Creative Direction", "slug": "creative-direction" },
-        { "id": "cat-4", "name": "Cinematic Arts", "slug": "cinematic-arts" }
+        { "id": "cat-3", "name": "Creative Strategy", "slug": "creative-strategy" },
+        { "id": "cat-4", "name": "Motion Ad Assets", "slug": "motion-ad-assets" }
       ],
       "capabilities": [
-        { "id": "cap-3", "name": "Cinematic Post & VFX", "description": "High-end editing, color grading, and computer-generated visual additions" },
-        { "id": "cap-4", "name": "Creative Direction", "description": "End-to-end campaign concept, scripts, and art direction" }
+        { "id": "cap-3", "name": "Performance Ad Creative Systems", "description": "High-impact video ads, UGC hooks, and motion graphic packs" },
+        { "id": "cap-4", "name": "Creative Strategy", "description": "Direct response ad concepts, scripts, and creative direction" }
       ]
     },
     {
       "id": "proj-3",
-      "slug": "neural-monolith",
-      "title": "Neural Monolith",
-      "description": "An experimental architectural sculpture translating global technological sentiment into live light fields.",
-      "year": 2024,
-      "projectType": "COLLABORATION",
+      "slug": "retention-revenue-engine",
+      "title": "Retention Revenue Engine",
+      "description": "Automated customer lifecycle workflows, behavioral email sequences, and SMS retention infrastructure.",
+      "year": 2025,
+      "projectType": "PRODUCT_SYSTEM",
       "status": "PUBLISHED",
       "featured": true,
-      "client": "Tokyo Tech Curation",
-      "location": "Tokyo, Japan",
-      "objective": "Create an immersive, interactive landmark in central Tokyo that visualizes global technological discourse and climate streams.",
-      "approach": "We designed a monolithic 12-meter tall steel and LED obelisk that continuously scrapes environmental data feeds and computes complex fluid dynamics.",
-      "execution": "Leveraging heavy high-density outdoor microLED screens, precise thermal management systems, and a custom sentiment-analysis crawler.",
-      "results": "Acclaimed worldwide in Wired, AD, and design journals. Instantly became a cultural meeting point and experimental reference for urban sculpture.",
+      "client": "Direct-to-Consumer Brands",
+      "location": "Global",
+      "objective": "Maximize customer lifetime value (LTV) and recover abandoned revenue without increasing ad spend.",
+      "approach": "Mapped customer purchase cycles and built behavioral triggers that deliver hyper-personalized email and SMS sequences.",
+      "execution": "Configured 18 automated lifecycle flows including dynamic post-purchase upsells, churn prediction alerts, and win-back sequences.",
+      "results": "Recovered $820k in abandoned checkouts and boosted repeat purchase rates by 38% across client portfolios.",
       "accentColor": "#06B6D4",
       "media": [
-        { "id": "monolith-1", "url": "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": true, "altText": "The Neural Monolith obelisk rising into the Tokyo rain" },
-        { "id": "monolith-2", "url": "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": false, "altText": "Procedural data flow details close up" }
+        { "id": "monolith-1", "url": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": true, "altText": "Data-driven marketing automation framework" },
+        { "id": "monolith-2", "url": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": false, "altText": "Customer journey analytics overview" }
       ],
       "categories": [
-        { "id": "cat-1", "name": "Spatial Design", "slug": "spatial-design" },
-        { "id": "cat-5", "name": "Digital Curation", "slug": "digital-curation" }
+        { "id": "cat-1", "name": "Retention Marketing", "slug": "retention-marketing" },
+        { "id": "cat-5", "name": "Marketing Automation", "slug": "marketing-automation" }
       ],
       "capabilities": [
-        { "id": "cap-1", "name": "Spatial & Environmental Design", "description": "Mapping and physical site transformations" },
-        { "id": "cap-5", "name": "Cultural & Visual Systems", "description": "Branding identity and comprehensive curated frameworks" }
+        { "id": "cap-5", "name": "Retention & Lifecycle Automation", "description": "Automated email sequences, SMS marketing, and churn reduction" }
       ]
     },
     {
       "id": "proj-4",
-      "slug": "vortex-synthesis",
-      "title": "Vortex Synthesis",
-      "description": "A fluid dynamics sonic installation designed in collaboration with the London Acoustics Lab.",
+      "slug": "brand-authority-toolkit",
+      "title": "Brand Authority Toolkit",
+      "description": "A high-conversion visual identity system and social asset pack for emerging tech and e-commerce leaders.",
       "year": 2024,
-      "projectType": "SPEC",
+      "projectType": "DIGITAL_PRODUCT",
       "status": "PUBLISHED",
       "featured": false,
-      "client": "Bureau Speculative",
-      "location": "London, UK",
-      "objective": "To visualize sound frequencies in physical, hyper-detailed water whirlpool structures.",
-      "approach": "We suspended heavy metallic resonance containers over custom sub-bass speakers, oscillating liquid columns with precise sound waves.",
-      "execution": "Integrated custom high-speed photography with strobe lighting arrays to lock liquid motions in visual states.",
-      "results": "Published as an independent research paper on wave-form visualization and exhibited globally.",
+      "client": "Digital Founders",
+      "location": "Global",
+      "objective": "Provide high-growth founders with a complete, conversion-tested design system to command premium market pricing.",
+      "approach": "Synthesized typography, dark-mode color palettes, 3D render libraries, and presentation decks into a unified Figma asset kit.",
+      "execution": "Engineered 120+ responsive web components, presentation templates, and social proof badges formatted for instant deployment.",
+      "results": "Adopted by 75+ funded startups to accelerate their public brand launch cycles.",
       "accentColor": "#6366F1",
       "media": [
-        { "id": "vortex-1", "url": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": true, "altText": "Whirlpool structures displaying acoustic geometry" }
+        { "id": "vortex-1", "url": "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?auto=format&fit=crop&q=80&w=1200", "type": "IMAGE", "isCover": true, "altText": "Minimalist digital brand assets and components layout" }
       ],
       "categories": [
-        { "id": "cat-1", "name": "Spatial Design", "slug": "spatial-design" }
+        { "id": "cat-1", "name": "Brand Identity", "slug": "brand-identity" }
       ],
       "capabilities": [
-        { "id": "cap-2", "name": "Procedural Engineering", "description": "Custom real-time software systems" }
+        { "id": "cap-4", "name": "Creative Strategy", "description": "Direct response ad concepts, scripts, and creative direction" }
       ]
     }
   ],
   "archive": [
     {
       "id": "arch-1",
-      "title": "Kuro Studio Identity",
+      "title": "SaaS Onboarding Flow Audit",
       "projectType": "CLIENT",
-      "year": 2023,
-      "category": "Visual Systems",
-      "client": "Kuro Architecture",
-      "linkUrl": "https://kuro.studio"
+      "year": 2024,
+      "category": "CRO & Retention",
+      "client": "Vortex Tech",
+      "linkUrl": null
     },
     {
       "id": "arch-2",
-      "title": "Liminal Spaces Research",
-      "projectType": "SELF_INITIATED",
-      "year": 2023,
-      "category": "Creative Direction",
-      "client": "Bureau Internal Research",
+      "title": "DTC Viral Hook Playbook",
+      "projectType": "DIGITAL_PRODUCT",
+      "year": 2024,
+      "category": "Ad Creatives",
+      "client": "Internal Product Lab",
       "linkUrl": null
     },
     {
       "id": "arch-3",
-      "title": "Spectral Echo Audio Synthesizer",
-      "projectType": "SPEC",
-      "year": 2022,
-      "category": "Procedural Engineering",
-      "client": "Audio Research Group",
-      "linkUrl": "https://github.com/shadowbureau/spectral-echo"
+      "title": "Multi-Touch Attribution Script",
+      "projectType": "OPEN_SOURCE",
+      "year": 2023,
+      "category": "Marketing Analytics",
+      "client": "AdTech Community",
+      "linkUrl": null
     },
     {
       "id": "arch-4",
-      "title": "Tectonic Plate Visualizations",
-      "projectType": "COLLABORATION",
-      "year": 2021,
-      "category": "Spatial Design",
-      "client": "Geological Society Paris",
+      "title": "Black Friday Ad Scaling Sprint",
+      "projectType": "CLIENT",
+      "year": 2023,
+      "category": "Paid Acquisition",
+      "client": "Luminary Commerce",
       "linkUrl": null
     }
   ],
   "capabilities": [
     {
       "id": "cap-1",
-      "name": "Creative Direction",
-      "description": "We establish unified creative visions, translating abstract cultural narratives into cinematic campaigns, scripts, visual guidelines, and design systems for forward-thinking brands."
+      "name": "Full-Funnel CRO & Architecture",
+      "description": "We design and build high-speed conversion landing pages, multi-step sales funnels, and checkout flows engineered to maximize customer acquisition and average order value."
     },
     {
       "id": "cap-2",
-      "name": "Spatial & Environmental Design",
-      "description": "Designing physical space transformations, large-scale projection mapping, architectural lighting installations, and sensory museum exhibitions that redefine spatial dynamics."
+      "name": "Paid Acquisition Systems",
+      "description": "Deploying data-driven media buying pipelines across Meta, Google Ads, and TikTok with conversion API tracking and automated scaling rules."
     },
     {
       "id": "cap-3",
-      "name": "Procedural & Visual Systems",
-      "description": "Building bespoke software frameworks, generative real-time render pipelines, neural media interfaces, and interactive data installations that adapt dynamically to human and spatial data inputs."
+      "name": "Performance Ad Creative Systems",
+      "description": "Producing high-impact direct-response motion design, 3D visual hooks, UGC video assets, and modular ad variations that drive high click-through rates."
     },
     {
       "id": "cap-4",
-      "name": "Cinematic Post & VFX",
-      "description": "Exacting post-production pipelines spanning high-fidelity editing, complex grading, architectural VFX synthesis, and spatial audio scoring that cultivate unparalleled sensory atmospheres."
+      "name": "Creative Strategy & Copywriting",
+      "description": "Developing customer avatars, psychological buying triggers, video scripts, and high-converting copy that turn cold impressions into paying customers."
     },
     {
       "id": "cap-5",
-      "name": "Cultural Curation",
-      "description": "Curating contemporary art exhibitions, editorial publications, global design panels, and luxury trend frameworks that connect progressive institutions to modern visual culture."
+      "name": "Retention & Lifecycle Automation",
+      "description": "Building automated email marketing flows, SMS sequences, and VIP loyalty programs in Klaviyo to maximize repeat sales and client lifetime value."
     }
   ],
   "team": [
     {
       "id": "team-1",
       "name": "Vesper Sterling",
-      "role": "Founder / Creative Director",
-      "bio": "Pioneered interactive projection models and neural aesthetics. Formerly curated experimental media galleries in Zurich.",
+      "role": "Head of Growth & Creative Direction",
+      "bio": "Specializes in direct-response creative frameworks and full-funnel customer acquisition systems for scaling brands.",
       "imageUrl": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=600"
     },
     {
       "id": "team-2",
       "name": "Kaelen Chen",
-      "role": "Principal Systems Architect",
-      "bio": "Specializes in high-density interactive environments and microLED fluid systems. Former systems research fellow at MIT.",
+      "role": "Lead Conversion Architect",
+      "bio": "Expert in landing page optimization, technical attribution tracking, and automated sales funnel engineering.",
       "imageUrl": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600"
     },
     {
       "id": "team-3",
       "name": "Dr. Elara Thorne",
-      "role": "Lead Spatial Designer / Researcher",
-      "bio": "Holds a Ph.D. in Generative Architecture and Acoustic Spatial Mapping. Investigates intersections of historical monuments and digital ruins.",
+      "role": "Lifecycle & Retention Strategist",
+      "bio": "Focuses on predictive customer LTV modeling, behavioral email automation, and multi-channel retention engines.",
       "imageUrl": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=600"
     }
   ],
   "socialPosts": [
     {
       "id": "post-1",
-      "title": "On Post-Human Architecture",
-      "platform": "Journal",
+      "title": "Scaling Cold Traffic Past 4.2x ROAS",
+      "platform": "Case Study",
       "date": "Aug 2026",
-      "content": "Our spatial team is compiling a series of speculative visual briefs exploring how generative neural networks re-project light in the structural vacancies of Gothic structures.",
-      "imageUrl": "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=600",
-      "linkUrl": "https://shadowbureau.co/journal/post-human"
+      "content": "A technical breakdown of how we engineered full-funnel ad variations, dynamic landing pages, and automated retargeting loops to scale cold traffic campaigns.",
+      "imageUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800",
+      "linkUrl": "https://shadowbureau.co/case-studies/scaling-roas"
     },
     {
       "id": "post-2",
-      "title": "Chronostasis Behind the Scenes",
-      "platform": "Vimeo",
+      "title": "Viral Motion Ad Framework v2.0",
+      "platform": "Digital Product",
       "date": "Jun 2026",
-      "content": "A raw look at the motion-capture, robotics, and ultra-high-speed camera programming behind the Maison de L'Ombre campaign. We slowed reality down by 40x.",
-      "imageUrl": "https://images.unsplash.com/photo-1536440136628-849c177e76a1?auto=format&fit=crop&q=80&w=600",
-      "linkUrl": "https://vimeo.com/shadowbureau/chronostasis-bts"
+      "content": "Inside our direct-response motion design vault: 50+ conversion-tested video hook templates, 3D asset presets, and modular ad layouts for modern brands.",
+      "imageUrl": "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&q=80&w=800",
+      "linkUrl": "https://shadowbureau.co/products/motion-vault"
     }
   ],
   "socialLinks": [
-    { "id": "link-1", "name": "Instagram", "url": "https://instagram.com/shadowbureau" },
-    { "id": "link-2", "name": "Vimeo", "url": "https://vimeo.com/shadowbureau" },
-    { "id": "link-3", "name": "LinkedIn", "url": "https://linkedin.com/company/shadowbureau" },
+    { "id": "link-1", "name": "Twitter / X", "url": "https://twitter.com/shadowbureau" },
+    { "id": "link-2", "name": "LinkedIn", "url": "https://linkedin.com/company/shadowbureau" },
+    { "id": "link-3", "name": "YouTube", "url": "https://youtube.com/@shadowbureau" },
     { "id": "link-4", "name": "GitHub", "url": "https://github.com/shadowbureau" }
   ],
   "studio": {
     "name": "Shadow Bureau",
-    "description": "Shadow Bureau is an experimental visual creative studio operating at the dynamic intersection of spatial architecture, cinematic campaign narratives, and procedural visual engineering. We do not just design; we build visual worlds for progressive brands and institutions globally.",
-    "location": "Paris // Berlin // Tokyo",
+    "description": "Shadow Bureau is a digital marketing systems and creative product studio. We engineer high-converting sales funnels, performance ad creative vaults, and automated customer growth products built to scale modern brands and direct-to-consumer businesses.",
+    "location": "Global / Remote",
     "founded": 2024,
-    "contactEmail": "bureau@shadowbureau.co"
+    "contactEmail": "growth@shadowbureau.co"
   },
   "contactSubmissions": [
     {
       "id": "sub-1",
-      "name": "Clara Dupont",
-      "email": "clara@legrandlux.fr",
-      "projectType": "CLIENT",
-      "budget": "€100k - €250k",
-      "description": "Seeking comprehensive art direction and live projection choreography for the upcoming Winter fashion collection in Paris.",
+      "name": "Marcus Vance",
+      "email": "marcus@scalecommerce.com",
+      "projectType": "GROWTH_SYSTEM",
+      "budget": "$25k - $50k",
+      "description": "Looking to overhaul our customer acquisition funnels and deploy modular creative ad packs for Q4 ad spend.",
       "status": "NEW",
       "createdAt": "2026-08-25T14:22:00.000Z"
     }

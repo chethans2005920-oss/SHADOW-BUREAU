@@ -30,8 +30,6 @@ import {
 import { Project, ArchiveItem, Capability, StudioInfo, TeamMember, SocialPost, SocialLink, ContactSubmission, ProjectMedia, Category } from './types';
 import { api } from './utils/api';
 
-// Digital Marketing Systems & Digital Products Showcase (E-Book, Graphic Design, & Motion Graphics Focus)
-// Digital Marketing Systems & Digital Products Showcase
 const DIGITAL_SHOWCASE: Project[] = [
   {
     id: "proj-1",
@@ -120,12 +118,10 @@ const DIGITAL_SHOWCASE: Project[] = [
 ];
 
 export default function App() {
-  // Intro Loading Sequence States
   const [introPercent, setIntroPercent] = useState(0);
   const [introCompleted, setIntroCompleted] = useState(false);
   const [introOutro, setIntroOutro] = useState(false);
 
-  // App Content States
   const [projects, setProjects] = useState<Project[]>([]);
   const [featuredProjects, setFeaturedProjects] = useState<Project[]>([]);
   const [archive, setArchive] = useState<ArchiveItem[]>([]);
@@ -136,14 +132,12 @@ export default function App() {
   const [socialPosts, setSocialPosts] = useState<SocialPost[]>([]);
   const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
   
-  // UI Interaction States
   const [activeProject, setActiveProject] = useState<Project | null>(null);
   const [previewDoc, setPreviewDoc] = useState<{ project: Project; type: 'DETAILS' | 'SPECIFICATION' } | null>(null);
   const [archiveFilter, setArchiveFilter] = useState<string>('ALL');
   const [isLoading, setIsLoading] = useState(true);
   const [errorState, setErrorState] = useState<string | null>(null);
 
-  // Contact Form State
   const [contactName, setContactName] = useState('');
   const [contactEmail, setContactEmail] = useState('');
   const [contactType, setContactType] = useState('CLIENT');
@@ -153,19 +147,16 @@ export default function App() {
   const [contactSuccess, setContactSuccess] = useState(false);
   const [contactError, setContactError] = useState<string | null>(null);
 
-  // Admin Mode States
   const [adminActive, setAdminActive] = useState(false);
   const [adminModalOpen, setAdminModalOpen] = useState(false);
   const [adminPassword, setAdminPassword] = useState('');
   const [adminAuthenticated, setAdminAuthenticated] = useState(false);
   const [adminError, setAdminError] = useState<string | null>(null);
 
-  // Work section popup trigger
   const [showWorkPopup, setShowWorkPopup] = useState(false);
   const workMarkerRef = useRef<HTMLDivElement | null>(null);
-  const [popupProgress, setPopupProgress] = useState(0); // 0..1 intersection progress
+  const [popupProgress, setPopupProgress] = useState(0);
     
-  // Observe the work marker to show popup when scrolled into view
   useEffect(() => {
     const section = document.getElementById('work');
     if (!section) return;
@@ -188,7 +179,6 @@ export default function App() {
     return () => observer.disconnect();
   }, []);
 
-  // Admin CMS States
   const [adminTab, setAdminTab] = useState<'PROJECTS' | 'CONTACTS'>('PROJECTS');
   const [adminProjects, setAdminProjects] = useState<Project[]>([]);
   const [adminContacts, setAdminContacts] = useState<ContactSubmission[]>([]);
@@ -197,11 +187,10 @@ export default function App() {
   const [currentTime, setCurrentTime] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   
-  // GMT+3 ticking clock
   useEffect(() => {
     const updateClock = () => {
       const options: Intl.DateTimeFormatOptions = {
-        timeZone: 'Europe/Moscow', // GMT+3
+        timeZone: 'Europe/Moscow',
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
@@ -211,7 +200,6 @@ export default function App() {
         const formatter = new Intl.DateTimeFormat('en-US', options);
         setCurrentTime(formatter.format(new Date()));
       } catch (e) {
-        // Fallback
         const d = new Date();
         const utc3 = new Date(d.getTime() + (d.getTimezoneOffset() * 60000) + (3 * 3600000));
         const hh = String(utc3.getHours()).padStart(2, '0');
@@ -228,7 +216,6 @@ export default function App() {
   const [scrollY, setScrollY] = useState(0);
   const videoRef = React.useRef<HTMLVideoElement>(null);
 
-  // Scroll tracking for cinematic void reveal
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
@@ -237,7 +224,6 @@ export default function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Intersection Observer for playing/pausing the showreel video when visible
   useEffect(() => {
     const videoElement = videoRef.current;
     if (!videoElement) return;
@@ -265,7 +251,6 @@ export default function App() {
     };
   }, []);
 
-  // 1. Intro Loading simulation on mount
   useEffect(() => {
     const timer = setInterval(() => {
       setIntroPercent((prev) => {
@@ -283,7 +268,6 @@ export default function App() {
     return () => clearInterval(timer);
   }, []);
 
-  // 2. Fetch all site data dynamically from the API v1 endpoints
   const loadSiteData = async () => {
     setIsLoading(true);
     setErrorState(null);
@@ -333,149 +317,11 @@ export default function App() {
     }
   }, [introCompleted]);
 
-  // Fetch admin content when admin is authenticated
-  const loadAdminData = async () => {
-    try {
-      const [cmsProjects, cmsContacts] = await Promise.all([
-        api.admin.getProjects(),
-        api.admin.getContacts()
-      ]);
-      setAdminProjects(cmsProjects);
-      setAdminContacts(cmsContacts);
-    } catch (err: any) {
-      setAdminError('Failed to synchronize CMS data stream: ' + err.message);
-    }
-  };
-
-  useEffect(() => {
-    if (adminAuthenticated) {
-      loadAdminData();
-    }
-  }, [adminAuthenticated]);
-
-  // Handle Contact Form Submission
-  const handleContactSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setContactSubmitting(true);
-    setContactError(null);
-    try {
-      await api.submitContact({
-        name: contactName,
-        email: contactEmail,
-        projectType: contactType,
-        budget: contactBudget,
-        description: contactDescription
-      });
-      setContactSuccess(true);
-      setContactName('');
-      setContactEmail('');
-      setContactDescription('');
-    } catch (err: any) {
-      setContactError(err.message || 'Transmission failed. Verify server routes.');
-    } finally {
-      setContactSubmitting(false);
-    }
-  };
-
-  // Authenticate Admin Panel
-  const handleAdminLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    setAdminError(null);
-    if (adminPassword.toLowerCase() === 'shadow') {
-      setAdminAuthenticated(true);
-      setAdminError(null);
-    } else {
-      setAdminError('INCORRECT ACCESS PROTOCOL CREDENTIALS.');
-    }
-  };
-
-  // Toggle submission status
-  const handleToggleContactStatus = async (id: string, currentStatus: string) => {
-    const nextStatus = currentStatus === 'NEW' ? 'REVIEWED' : currentStatus === 'REVIEWED' ? 'ARCHIVED' : 'NEW';
-    try {
-      await api.admin.updateContact(id, nextStatus);
-      loadAdminData();
-    } catch (err: any) {
-      alert('Failed to update submission status: ' + err.message);
-    }
-  };
-
-  // Initialize a new blank project in CMS
-  const handleInitNewProject = () => {
-    setEditingProject({
-      title: 'New Spatial Project',
-      description: 'Speculative draft project detailing modern cinematic systems.',
-      year: new Date().getFullYear(),
-      projectType: 'CLIENT',
-      status: 'DRAFT',
-      featured: false,
-      client: 'Avant-Garde Client',
-      location: 'Paris // Berlin',
-      objective: 'Core visual objective and space parameters.',
-      approach: 'Creative direction approach and concept structures.',
-      execution: 'Detailed logistical execution and tech stack.',
-      results: 'Key results, physical exhibition count, and media outputs.',
-      accentColor: '#FFFFFF',
-      media: [
-        { id: 'm-1', url: 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?auto=format&fit=crop&q=80&w=1200', type: 'IMAGE', isCover: true, altText: 'Default installation visual cover' }
-      ],
-      categories: [
-        { id: 'cat-1', name: 'Spatial Curation', slug: 'spatial-curation' }
-      ],
-      capabilities: [
-        { id: 'cap-1', name: 'Creative Direction', description: 'Concept development and scripting' }
-      ]
-    });
-  };
-
-  // Save project edits
-  const handleSaveProject = async () => {
-    if (!editingProject?.title) {
-      alert('A project title is strictly required.');
-      return;
-    }
-    setIsCmsActionLoading(true);
-    try {
-      if (editingProject.id) {
-        await api.admin.updateProject(editingProject.id, editingProject as Project);
-      } else {
-        await api.admin.createProject(editingProject as Omit<Project, 'id' | 'slug'>);
-      }
-      setEditingProject(null);
-      await Promise.all([loadSiteData(), loadAdminData()]);
-    } catch (err: any) {
-      alert('CMS transaction error: ' + err.message);
-    } finally {
-      setIsCmsActionLoading(false);
-    } 
-  };
-
-  // Delete project via CMS
-  const handleDeleteProject = async (id: string) => {
-    if (!confirm('Are you absolutely sure you want to purge this project from the database?')) return;
-    try {
-      await api.admin.deleteProject(id);
-      await Promise.all([loadSiteData(), loadAdminData()]);
-    } catch (err: any) {
-      alert('purge failed: ' + err.message);
-    }
-  };
-
-  // Helper to get cover media URL
   const getCoverUrl = (proj: Project) => {
     const cover = proj.media?.find((m) => m.isCover);
     return cover ? cover.url : (proj.media?.[0]?.url || 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80&w=1200');
   };
 
-  // Filtering for archive
-  const filteredArchive = archive.filter(item => {
-    if (archiveFilter === 'ALL') return true;
-    return item.projectType === archiveFilter;
-  });
-
-  // -------------------------------------------------------------
-  // RENDER INTERACTIVE LOBBY / INTRO LOADING
-  // -------------------------------------------------------------
   if (!introCompleted) {
     return (
       <div 
@@ -543,12 +389,17 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-zinc-300 selection:bg-zinc-800 selection:text-white flex flex-col relative scanlines geo-grid">
-      {/* Absolute Dark Vignette Gradient */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-950 via-black to-black pointer-events-none" />
+    <div className="min-h-screen text-zinc-300 selection:bg-zinc-800 selection:text-white flex flex-col relative">
+      
+      {/* 100% VISIBLE FULL PAGE GRADIENT IMAGE BACKGROUND */}
+      <img
+        src="/web.png"
+        alt="Page Background"
+        className="absolute inset-0 w-full h-full object-fill pointer-events-none z-0 select-none"
+      />
 
       {/* EDITORIAL HEADER */}
-      <header className="sticky top-0 z-50 bg-black/95 border-b border-neutral-900 px-6 md:px-12 py-5 flex justify-between items-center transition-all duration-300 font-mono text-[10px] tracking-widest text-zinc-400 uppercase">
+      <header className="sticky top-0 z-50 bg-black/40 backdrop-blur-md border-b border-white/10 px-6 md:px-12 py-5 flex justify-between items-center transition-all duration-300 font-mono text-[10px] tracking-widest text-zinc-400 uppercase">
         <a href="#hero" className="flex items-center gap-3 group text-white">
           <div className="w-5 h-5 rounded-full overflow-hidden border border-neutral-800 flex-shrink-0 relative">
             <img 
@@ -572,7 +423,7 @@ export default function App() {
         </button>
       </header>
 
-      {/* Fullscreen Premium Overlay Menu */}
+      {/* Fullscreen Overlay Menu */}
       {menuOpen && (
         <motion.div 
           initial={{ opacity: 0 }}
@@ -640,15 +491,15 @@ export default function App() {
         )}
 
         {/* HERO SECTION */}
-        <section id="hero" className="relative h-[200vh] w-full bg-[#020202] -mx-6 md:-mx-12 px-6 md:px-12 overflow-visible">
+        <section id="hero" className="relative h-[200vh] w-full -mx-6 md:-mx-12 px-6 md:px-12 overflow-visible">
           <div className="sticky top-[100px] left-0 w-full h-[85vh] overflow-hidden flex flex-col justify-between py-10 z-10">
             
             <div 
-              className="absolute inset-0 z-0 bg-[#020202] flex items-center justify-center overflow-hidden pointer-events-none select-none"
+              className="absolute inset-0 z-0 flex items-center justify-center overflow-hidden pointer-events-none select-none"
               style={{ perspective: "1200px" }}
             >
               <div 
-                className="absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-[radial-gradient(circle,_rgba(0,140,255,0.4)_0%,_transparent_70%)] filter blur-3xl pointer-events-none"
+                className="absolute w-[400px] h-[400px] sm:w-[600px] sm:h-[600px] md:w-[800px] md:h-[800px] rounded-full bg-[radial-gradient(circle,_rgba(0,140,255,0.3)_0%,_transparent_70%)] filter blur-3xl pointer-events-none"
                 style={{
                   transform: `scale(${1 + Math.sin(scrollY * 0.005) * 0.15})`,
                   opacity: Math.min(0.9, 0.45 + (scrollY / 400))
@@ -673,15 +524,12 @@ export default function App() {
                   referrerPolicy="no-referrer"
                 />
               </div>
-
-              <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-black/40 to-[#020202]/90 pointer-events-none" />
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_25%,_#020202_85%)] pointer-events-none" />
             </div>
 
             <div className="relative z-10 w-full flex justify-between items-start">
               <div className="space-y-4">
                 <h1 
-                  className="text-[9vw] sm:text-[7vw] font-sans font-black tracking-tighter leading-none text-white select-none relative -left-1 uppercase"
+                  className="text-[9vw] sm:text-[7vw] font-sans font-black tracking-tighter leading-none text-white select-none relative -left-1 uppercase drop-shadow-md"
                   style={{
                     transform: `translateY(${scrollY * -0.1}px)`,
                     transition: 'transform 0.1s ease-out'
@@ -699,7 +547,7 @@ export default function App() {
                 >
                   <a 
                     href="#work"
-                    className="w-10 h-10 border border-neutral-850 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all text-zinc-400 group cursor-pointer bg-[#020202]/40 backdrop-blur-sm"
+                    className="w-10 h-10 border border-white/20 flex items-center justify-center hover:bg-white hover:text-black hover:border-white transition-all text-zinc-400 group cursor-pointer bg-black/40 backdrop-blur-sm"
                   >
                     <Plus className="w-4 h-4 group-hover:rotate-90 transition-transform" />
                   </a>
@@ -716,7 +564,7 @@ export default function App() {
             >
               <a 
                 href="#contact" 
-                className="hover:text-white font-bold flex items-center gap-2 border-b border-zinc-800 pb-1 group"
+                className="hover:text-white font-bold flex items-center gap-2 border-b border-zinc-700 pb-1 group"
               >
                 DISCUSS PROJECT <span className="inline-block group-hover:translate-x-1 transition-transform">→</span>
               </a>
@@ -730,14 +578,14 @@ export default function App() {
               }}
             >
               <div className="flex items-center gap-3">
-                <span className="w-1.5 h-1.5 rounded-full bg-zinc-600 animate-ping" />
+                <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 animate-ping" />
                 <span>● PROJECTS [01]</span>
               </div>
-              <span className="text-zinc-600 animate-bounce mt-2 text-[10px]">↓ SCROLL TO INITIATE REVEAL</span>
+              <span className="text-zinc-400 animate-bounce mt-2 text-[10px]">↓ SCROLL TO INITIATE REVEAL</span>
             </div>
 
             <div 
-              className="relative z-10 w-full border-t border-neutral-900/60 pt-8 bg-gradient-to-t from-black/60 to-transparent transition-all duration-500"
+              className="relative z-10 w-full border-t border-white/10 pt-8 transition-all duration-500"
               style={{
                 opacity: Math.min(1, Math.max(0, (scrollY - 200) / 300)),
                 transform: `translateY(${Math.max(0, 50 - (scrollY - 200) * 0.1)}px)`
@@ -748,12 +596,12 @@ export default function App() {
                   <h2 className="text-lg sm:text-xl md:text-2xl font-sans font-extrabold text-white leading-snug tracking-tight uppercase">
                     WE ENGINEER PREDICTABLE REVENUE ENGINES, HIGH-CONVERSION MARKETING SYSTEMS, AND DIGITAL ASSETS BUILT TO SCALE MODERN BRANDS.
                   </h2>
-                  <p className="text-zinc-400 text-xs leading-relaxed max-w-2xl font-serif italic">
+                  <p className="text-zinc-300 text-xs leading-relaxed max-w-2xl font-serif italic">
                     We architect scalable acquisition funnels, direct-response ad creative packs, and automated retention systems that convert cold traffic into high-lifetime-value customers.
                   </p>
                 </div>
 
-                <div className="lg:col-span-3 space-y-3 font-sans text-[10px] sm:text-xs leading-relaxed text-zinc-500">
+                <div className="lg:col-span-3 space-y-3 font-sans text-[10px] sm:text-xs leading-relaxed text-zinc-400">
                   <p className="uppercase">
                     WE EMPOWER VISIONARY FOUNDERS AND COMMERCE LEADERS TO DOMINATE THEIR MARKETS. OUR SYSTEMS COMBINE DATA-DRIVEN ACQUISITION WITH HIGH-IMPACT CREATIVE DESIGN.
                   </p>
@@ -762,7 +610,7 @@ export default function App() {
                 <div className="lg:col-span-2 flex justify-start lg:justify-end">
                   <a 
                     href="#work" 
-                    className="font-mono text-[10px] text-white hover:text-zinc-400 flex items-center gap-2 border-b border-white pb-1 group tracking-wider uppercase font-bold"
+                    className="font-mono text-[10px] text-white hover:text-zinc-300 flex items-center gap-2 border-b border-white pb-1 group tracking-wider uppercase font-bold"
                   >
                     Explore Products <span className="inline-block group-hover:translate-y-1 transition-transform duration-300">↓</span>
                   </a>
@@ -775,9 +623,9 @@ export default function App() {
 
         {/* SELECTED WORK */}
         <section id="work" className="space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-neutral-900 pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6">
             <div className="space-y-2">
-              <span className="eyebrow-spaced text-[10px] font-mono text-zinc-500">EXHIBITION 01</span>
+              <span className="eyebrow-spaced text-[10px] font-mono text-zinc-400">EXHIBITION 01</span>
               <h3 className="text-2xl md:text-3xl font-bold font-serif text-white">SELECTED WORK</h3>
             </div>
             <p className="text-xs font-mono text-zinc-400 mt-2 md:mt-0 max-w-xs">
@@ -793,9 +641,9 @@ export default function App() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="w-full relative border border-neutral-900 bg-black p-0 overflow-hidden group/reel"
+            className="w-full relative border border-white/10 bg-black/40 backdrop-blur-sm p-0 overflow-hidden group/reel"
           >
-            <div className="relative aspect-video w-full overflow-hidden bg-black">
+            <div className="relative aspect-video w-full overflow-hidden bg-black/40">
               <video
                 ref={videoRef}
                 src="/SHADOW_BUREAU_—_SECOND_CINE.mp4"
@@ -833,45 +681,45 @@ export default function App() {
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                     onClick={() => setActiveProject(proj)}
-                    className={`group cursor-pointer grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-b border-neutral-900/60 pb-16 transition-all duration-300 ${
+                    className={`group cursor-pointer grid grid-cols-1 lg:grid-cols-12 gap-8 items-center border-b border-white/10 pb-16 transition-all duration-300 ${
                       idx % 2 === 1 ? 'lg:flex-row-reverse' : ''
                     }`}
                   >
                     <div className="lg:col-span-5 space-y-6">
                       <div className="space-y-2">
                         <div className="flex items-center gap-3">
-                          <span className="font-mono text-[9px] text-zinc-500 uppercase">
+                          <span className="font-mono text-[9px] text-zinc-300 uppercase">
                             {proj.projectType.replace('_', ' ')}
                           </span>
-                          <span className="text-zinc-600">//</span>
-                          <span className="font-mono text-[9px] text-zinc-400">
+                          <span className="text-zinc-500">//</span>
+                          <span className="font-mono text-[9px] text-zinc-300">
                             {proj.year}
                           </span>
                         </div>
-                        <h4 className="text-2xl sm:text-3xl font-sans font-black tracking-tight text-white group-hover:text-zinc-300 transition-colors uppercase">
+                        <h4 className="text-2xl sm:text-3xl font-sans font-black tracking-tight text-white group-hover:text-zinc-200 transition-colors uppercase">
                           {proj.title}
                         </h4>
                       </div>
 
-                      <p className="text-xs text-zinc-400 font-sans leading-relaxed max-w-sm">
+                      <p className="text-xs text-zinc-300 font-sans leading-relaxed max-w-sm">
                         {proj.description}
                       </p>
 
                       <div className="flex items-center gap-2">
                         <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: proj.accentColor || '#FFFFFF' }} />
-                        <span className="font-mono text-[9px] text-zinc-500 uppercase">EXAMINE BRIEF ↗</span>
+                        <span className="font-mono text-[9px] text-zinc-300 uppercase">EXAMINE BRIEF ↗</span>
                       </div>
                     </div>
 
                     <div className="lg:col-span-7">
-                      <div className="w-full aspect-[16/10] sm:aspect-[16/9] overflow-hidden border border-neutral-900 shadow-2xl relative crosshair-container crosshair-tl crosshair-tr crosshair-bl crosshair-br">
+                      <div className="w-full aspect-[16/10] sm:aspect-[16/9] overflow-hidden border border-white/15 shadow-2xl relative">
                         <img
                           src={getCoverUrl(proj)}
                           alt={proj.title}
-                          className="w-full h-full object-cover filter brightness-[0.9] group-hover:scale-102 group-hover:brightness-100 transition-all duration-[1200ms]"
+                          className="w-full h-full object-cover filter brightness-[0.95] group-hover:scale-102 group-hover:brightness-100 transition-all duration-[1200ms]"
                           referrerPolicy="no-referrer"
                         />
-                        <div className="absolute inset-0 bg-neutral-950/10 group-hover:bg-transparent transition-all duration-700" />
+                        <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all duration-700" />
                       </div>
                     </div>
                   </motion.article>
@@ -883,7 +731,7 @@ export default function App() {
 
         {/* CASE STUDY SLIDER MODAL */}
         {activeProject && (
-          <section className="bg-black/95 backdrop-blur-md border border-zinc-400/60 rounded-none p-6 md:p-12 space-y-8 shadow-[0_0_60px_rgba(0,80,255,0.3)] relative scroll-mt-24 crosshair-container crosshair-tl crosshair-tr crosshair-bl crosshair-br" id="project-experience-slider">
+          <section className="bg-black/95 backdrop-blur-md border border-zinc-400/60 rounded-none p-6 md:p-12 space-y-8 shadow-[0_0_60px_rgba(0,80,255,0.3)] relative scroll-mt-24" id="project-experience-slider">
             <button
               onClick={() => setActiveProject(null)}
               className="absolute top-6 right-6 p-2 bg-black hover:bg-zinc-900 text-zinc-300 hover:text-white rounded-none border border-zinc-500/60 cursor-pointer transition-colors"
@@ -891,11 +739,11 @@ export default function App() {
               <X className="w-4 h-4" />
             </button>
 
-            <span className="eyebrow-spaced text-[10px] font-mono text-zinc-500">EXHIBITION 02 // CASE NARRATIVE</span>
+            <span className="eyebrow-spaced text-[10px] font-mono text-zinc-400">EXHIBITION 02 // CASE NARRATIVE</span>
             
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
               <div className="lg:col-span-6 space-y-4">
-                <div className="rounded-none overflow-hidden aspect-[4/3] bg-neutral-900 border border-neutral-900 shadow-inner">
+                <div className="rounded-none overflow-hidden aspect-[4/3] bg-neutral-900 border border-white/10 shadow-inner">
                   <img
                     src={getCoverUrl(activeProject)}
                     alt={activeProject.title}
@@ -905,13 +753,13 @@ export default function App() {
                 {activeProject.media && activeProject.media.length > 1 && (
                   <div className="grid grid-cols-2 gap-4">
                     {activeProject.media.filter(m => !m.isCover).map((media, idx) => (
-                      <div key={media.id || idx} className="rounded-none overflow-hidden aspect-[3/2] bg-neutral-900 border border-neutral-900">
+                      <div key={media.id || idx} className="rounded-none overflow-hidden aspect-[3/2] bg-neutral-900 border border-white/10">
                         <img src={media.url} alt={media.altText || ''} className="w-full h-full object-cover" />
                       </div>
                     ))}
                   </div>
                 )}
-                <div className="font-mono text-[9px] text-zinc-500 flex justify-between">
+                <div className="font-mono text-[9px] text-zinc-400 flex justify-between">
                   <span>METADATA ACCENT: {activeProject.accentColor || '#FFFFFF'}</span>
                   <span>LOCATION: {activeProject.location || 'N/A'}</span>
                 </div>
@@ -920,7 +768,7 @@ export default function App() {
               <div className="lg:col-span-6 space-y-6">
                 <div>
                   <h4 className="text-3xl font-serif font-bold text-white mb-2">{activeProject.title}</h4>
-                  <div className="flex flex-wrap gap-4 text-xs font-mono text-zinc-400 border-b border-neutral-900 pb-4">
+                  <div className="flex flex-wrap gap-4 text-xs font-mono text-zinc-400 border-b border-white/10 pb-4">
                     <span>YEAR: {activeProject.year}</span>
                     <span>CLIENT: {activeProject.client || 'N/A'}</span>
                     <span>TYPE: {activeProject.projectType.replace('_', ' ')}</span>
@@ -929,26 +777,26 @@ export default function App() {
 
                 <div className="space-y-4 text-xs md:text-sm">
                   <div className="grid grid-cols-1 md:grid-cols-4 gap-2">
-                    <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">01 // OBJECTIVE</span>
-                    <p className="md:col-span-3 text-zinc-300 leading-relaxed font-sans font-medium">
+                    <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">01 // OBJECTIVE</span>
+                    <p className="md:col-span-3 text-zinc-200 leading-relaxed font-sans font-medium">
                       {activeProject.objective || 'No objective narrative registered.'}
                     </p>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2 border-t border-neutral-900/60 pt-4">
-                    <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">02 // APPROACH</span>
-                    <p className="md:col-span-3 text-zinc-300 leading-relaxed font-sans font-medium">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2 border-t border-white/10 pt-4">
+                    <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">02 // APPROACH</span>
+                    <p className="md:col-span-3 text-zinc-200 leading-relaxed font-sans font-medium">
                       {activeProject.approach || 'No approach narrative registered.'}
                     </p>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2 border-t border-neutral-900/60 pt-4">
-                    <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">03 // EXECUTION</span>
-                    <p className="md:col-span-3 text-zinc-300 leading-relaxed font-sans font-medium">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2 border-t border-white/10 pt-4">
+                    <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">03 // EXECUTION</span>
+                    <p className="md:col-span-3 text-zinc-200 leading-relaxed font-sans font-medium">
                       {activeProject.execution || 'No execution narrative registered.'}
                     </p>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2 border-t border-neutral-900/60 pt-4">
-                    <span className="font-mono text-[10px] text-zinc-500 uppercase tracking-wider">04 // RESULTS</span>
-                    <p className="md:col-span-3 text-zinc-300 leading-relaxed font-sans font-medium">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-2 border-t border-white/10 pt-4">
+                    <span className="font-mono text-[10px] text-zinc-400 uppercase tracking-wider">04 // RESULTS</span>
+                    <p className="md:col-span-3 text-zinc-200 leading-relaxed font-sans font-medium">
                       {activeProject.results || 'No results statistics registered.'}
                     </p>
                   </div>
@@ -959,24 +807,24 @@ export default function App() {
         )}
 
         {/* ABOUT & MANIFESTO */}
-        <section id="about" className="grid grid-cols-1 lg:grid-cols-12 gap-16 border-t border-b border-neutral-950 py-16">
+        <section id="about" className="grid grid-cols-1 lg:grid-cols-12 gap-16 border-t border-b border-white/10 py-16">
           <div className="lg:col-span-7 space-y-8" id="studio">
-            <span className="eyebrow-spaced text-[10px] font-mono text-zinc-500">EXHIBITION 04 // CREATIVE PROTOCOL</span>
-            <div className="space-y-6 font-serif text-xl md:text-2xl italic font-light tracking-wide text-zinc-200 leading-relaxed border-l-2 border-blue-500/60 pl-6">
+            <span className="eyebrow-spaced text-[10px] font-mono text-zinc-400">EXHIBITION 04 // CREATIVE PROTOCOL</span>
+            <div className="space-y-6 font-serif text-xl md:text-2xl italic font-light tracking-wide text-zinc-100 leading-relaxed border-l-2 border-blue-500/60 pl-6">
               <p className="hover:text-white transition-colors duration-300">
                 “ ELEVATING BRANDS THROUGH PRECISION GRAPHIC DESIGN, KINETIC MOTION GRAPHICS, AND HIGH-CONVERTING DIGITAL PUBLICATIONS. ”
               </p>
             </div>
-            <p className="text-xs font-mono text-zinc-400 max-w-lg leading-relaxed">
+            <p className="text-xs font-mono text-zinc-300 max-w-lg leading-relaxed">
               ESTABLISHED FOR CREATIVE DIRECTORS // GLOBAL REMOTE OPERATIONS. <br />
               DIRECT INQUIRIES: shadowbureau.co@gmail.com
             </p>
           </div>
 
           <div className="lg:col-span-5 space-y-8">
-            <span className="eyebrow-spaced text-[10px] font-mono text-zinc-500">EXHIBITION 05 // SYSTEM TEAM</span>
+            <span className="eyebrow-spaced text-[10px] font-mono text-zinc-400">EXHIBITION 05 // SYSTEM TEAM</span>
             {studioInfo && (
-              <p className="text-sm text-zinc-400 leading-relaxed font-sans font-medium">
+              <p className="text-sm text-zinc-300 leading-relaxed font-sans font-medium">
                 {studioInfo.description}
               </p>
             )}
@@ -985,19 +833,19 @@ export default function App() {
 
         {/* FROM THE BUREAU FEED */}
         <section id="bureau-feed" className="space-y-12">
-          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-neutral-900 pb-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-white/10 pb-6">
             <div className="space-y-2">
-              <span className="eyebrow-spaced text-[10px] font-mono text-zinc-500">EXHIBITION 07</span>
+              <span className="eyebrow-spaced text-[10px] font-mono text-zinc-400">EXHIBITION 07</span>
               <h3 className="text-2xl md:text-3xl font-bold font-serif text-white">FROM THE BUREAU</h3>
             </div>
-            <p className="text-xs font-mono text-zinc-400 mt-2 md:mt-0">
+            <p className="text-xs font-mono text-zinc-300 mt-2 md:mt-0">
               Growth architectures, performance case studies, and digital products.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex flex-col md:flex-row gap-6 bg-neutral-950/10 border border-neutral-900 rounded-none p-6 hover:border-neutral-700 transition-all">
-              <div className="w-full md:w-1/3 aspect-video md:aspect-square rounded-none overflow-hidden relative shadow-md border border-neutral-900">
+            <div className="flex flex-col md:flex-row gap-6 bg-black/30 backdrop-blur-sm border border-white/10 rounded-none p-6 hover:border-white/30 transition-all">
+              <div className="w-full md:w-1/3 aspect-video md:aspect-square rounded-none overflow-hidden relative shadow-md border border-white/10">
                 <img 
                   src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800" 
                   alt="Analytics Growth Dashboard" 
@@ -1006,23 +854,23 @@ export default function App() {
               </div>
               <div className="flex-1 flex flex-col justify-between space-y-3">
                 <div className="space-y-1">
-                  <div className="flex justify-between text-[9px] font-mono text-zinc-500 tracking-wider">
+                  <div className="flex justify-between text-[9px] font-mono text-zinc-400 tracking-wider">
                     <span>[CASE STUDY]</span>
                     <span>AUG 2026</span>
                   </div>
                   <h4 className="font-serif text-sm font-bold text-white">Scaling Cold Traffic Past 4.2x ROAS</h4>
-                  <p className="text-[11px] text-zinc-400 leading-relaxed font-sans">
+                  <p className="text-[11px] text-zinc-300 leading-relaxed font-sans">
                     A technical breakdown of how we engineered full-funnel ad variations, dynamic landing pages, and automated retargeting loops to scale customer acquisition.
                   </p>
                 </div>
-                <a href="#contact" className="text-[10px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 transition-colors mt-2">
+                <a href="#contact" className="text-[10px] font-mono text-zinc-300 hover:text-white flex items-center gap-1 transition-colors mt-2">
                   EXAMINE BREAKDOWN <ArrowUpRight className="w-3 h-3" />
                 </a>
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-6 bg-neutral-950/10 border border-neutral-900 rounded-none p-6 hover:border-neutral-700 transition-all">
-              <div className="w-full md:w-1/3 aspect-video md:aspect-square rounded-none overflow-hidden relative shadow-md border border-neutral-900">
+            <div className="flex flex-col md:flex-row gap-6 bg-black/30 backdrop-blur-sm border border-white/10 rounded-none p-6 hover:border-white/30 transition-all">
+              <div className="w-full md:w-1/3 aspect-video md:aspect-square rounded-none overflow-hidden relative shadow-md border border-white/10">
                 <img 
                   src="https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?auto=format&fit=crop&q=80&w=800" 
                   alt="3D Digital Product Assets" 
@@ -1031,16 +879,16 @@ export default function App() {
               </div>
               <div className="flex-1 flex flex-col justify-between space-y-3">
                 <div className="space-y-1">
-                  <div className="flex justify-between text-[9px] font-mono text-zinc-500 tracking-wider">
+                  <div className="flex justify-between text-[9px] font-mono text-zinc-400 tracking-wider">
                     <span>[DIGITAL PRODUCT]</span>
                     <span>JUN 2026</span>
                   </div>
                   <h4 className="font-serif text-sm font-bold text-white">Viral Motion Ad Framework v2.0</h4>
-                  <p className="text-[11px] text-zinc-400 leading-relaxed font-sans">
+                  <p className="text-[11px] text-zinc-300 leading-relaxed font-sans">
                     Inside our performance creative vault: 50+ conversion-tested video hook templates, 3D asset presets, and modular direct-response ad layouts.
                   </p>
                 </div>
-                <a href="#contact" className="text-[10px] font-mono text-zinc-400 hover:text-white flex items-center gap-1 transition-colors mt-2">
+                <a href="#contact" className="text-[10px] font-mono text-zinc-300 hover:text-white flex items-center gap-1 transition-colors mt-2">
                   ACCESS PRODUCT VAULT <ArrowUpRight className="w-3 h-3" />
                 </a>
               </div>
@@ -1049,14 +897,14 @@ export default function App() {
         </section>
 
         {/* CONTACT SECTION */}
-        <section id="contact" className="space-y-8 py-24 px-6 sm:px-12 border-t border-neutral-950 text-center flex flex-col items-center justify-center w-full">
+        <section id="contact" className="space-y-8 py-24 px-6 sm:px-12 border-t border-white/10 text-center flex flex-col items-center justify-center w-full">
           <div className="max-w-2xl mx-auto space-y-6 flex flex-col items-center justify-center text-center">
-            <span className="eyebrow-spaced text-[10px] font-mono text-zinc-500 block tracking-[0.4em] text-center w-full">EXHIBITION 08 // CONNECT</span>
+            <span className="eyebrow-spaced text-[10px] font-mono text-zinc-400 block tracking-[0.4em] text-center w-full">EXHIBITION 08 // CONNECT</span>
             <h3 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-sans font-black tracking-tight text-white leading-tight uppercase text-center w-full flex flex-col items-center justify-center gap-2">
               <span className="block">HAVE SOMETHING WORTH MAKING?</span>
               <a 
                 href="mailto:shadowbureau.co@gmail.com" 
-                className="relative z-50 text-zinc-400 hover:text-white transition-colors duration-300 select-all cursor-pointer underline decoration-neutral-800 hover:decoration-white decoration-1 underline-offset-4 block text-center text-lg sm:text-2xl md:text-4xl lg:text-5xl break-all"
+                className="relative z-50 text-zinc-300 hover:text-white transition-colors duration-300 select-all cursor-pointer underline decoration-white/40 hover:decoration-white decoration-1 underline-offset-4 block text-center text-lg sm:text-2xl md:text-4xl lg:text-5xl break-all"
               >
                 shadowbureau.co@gmail.com
               </a>
@@ -1067,7 +915,7 @@ export default function App() {
                 href="https://www.instagram.com/shadowbureau.co?igsi=MTlkcG52MTVpejltaw=="
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative z-50 inline-flex items-center gap-2 px-5 py-2.5 border border-neutral-900 bg-neutral-950/45 hover:bg-white hover:text-black hover:border-white text-zinc-400 font-mono text-[11px] tracking-widest uppercase transition-all duration-300 cursor-pointer rounded-none"
+                className="relative z-50 inline-flex items-center gap-2 px-5 py-2.5 border border-white/20 bg-black/40 hover:bg-white hover:text-black hover:border-white text-zinc-200 font-mono text-[11px] tracking-widest uppercase transition-all duration-300 cursor-pointer rounded-none"
               >
                 <Instagram className="w-4 h-4" />
                 <span>INSTAGRAM // SHADOWBUREAU.CO</span>
@@ -1078,18 +926,18 @@ export default function App() {
       </main>
 
       {/* FOOTER */}
-      <footer className="border-t border-neutral-950 bg-[#030303] pt-24 pb-12 px-6 md:px-12 relative z-10">
+      <footer className="border-t border-white/10 bg-transparent pt-24 pb-12 px-6 md:px-12 relative z-10">
         <div className="max-w-7xl mx-auto space-y-16">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 font-mono text-[10px] text-zinc-500 text-center md:text-left">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 font-mono text-[10px] text-zinc-300 text-center md:text-left">
             <span>© 2026 SHADOW BUREAU CO. ALL CODES SECURED.</span>
           </div>
-          <div className="pt-8 border-t border-neutral-950 overflow-hidden">
+          <div className="pt-8 border-t border-white/10 overflow-hidden">
             <motion.h2 
               initial={{ opacity: 0.1, scale: 0.92, y: 50, filter: "brightness(0.3) blur(2px)" }}
               whileInView={{ opacity: 0.85, scale: 1, y: 0, filter: "brightness(1.2) blur(0px)" }}
               viewport={{ once: false, margin: "-100px" }}
               transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1] }}
-              className="text-[14vw] font-sans font-black tracking-tighter leading-none text-zinc-900 select-none uppercase hover:text-white transition-colors duration-500"
+              className="text-[14vw] font-sans font-black tracking-tighter leading-none text-white/20 select-none uppercase hover:text-white transition-colors duration-500"
             >
               Shadow Bureau
             </motion.h2>
